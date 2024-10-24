@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './not-found.module.scss';
-import NotFoundImage from '../../assets/images/404_.webp'
+import NotFoundImage from '../../assets/images/not-found_1.png'
 
-const NotFoundPage: React.FC = () => {
+export const NotFoundPage: React.FC = () => {
   return (
     <section className={styles.notFound}>
       <h1 className={styles.notFound__title}>Страница не найдена</h1>
@@ -13,4 +13,3 @@ const NotFoundPage: React.FC = () => {
   );
 };
 
-export default NotFoundPage;

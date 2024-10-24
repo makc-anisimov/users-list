@@ -1,0 +1,66 @@
+.employeesList {
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #50514a;
+  -webkit-box-shadow: 0px 0px 8px 4px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 0px 8px 4px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 0px 8px 4px rgba(34, 60, 80, 0.2);
+
+  &__item {
+    width: 100%;
+    // min-height: 28px;
+    border-bottom: 1px solid #50514a;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  &__header {
+    font-weight: 600;
+    background-color: #bdcd68;
+    min-height: 28px;
+    width: 100%;
+    color: #50514a;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  &__link {
+    min-height: 28px;
+    width: 100%;
+    color: #50514a;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &:hover {
+      -webkit-box-shadow: 0px 0px 8px 4px rgba(80, 81, 74, 0.2) inset;
+      -moz-box-shadow: 0px 0px 8px 4px rgba(80, 81, 74, 0.2) inset;
+      box-shadow: 0px 0px 8px 4px rgba(80, 81, 74, 0.2) inset;
+    }
+  }
+  &__name {
+    margin-right: auto;
+    padding-left: 16px;
+  }
+  &__birthday {
+    min-width: 200px;
+    text-align: center;
+    border-left: 1px solid #50514a;
+  }
+
+  &__role {
+    min-width: 120px;
+    border-left: 1px solid #50514a;
+    text-align: center;
+  }
+  &__phone {
+    min-width: 200px;
+    text-align: center;
+    border-left: 1px solid #50514a;
+  }
+}

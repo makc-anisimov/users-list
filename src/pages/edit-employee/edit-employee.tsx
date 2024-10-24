@@ -2,43 +2,45 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { updateEmployee } from '../store/employeesSlice';
-import InputMask from 'react-input-mask';
-import { RootState } from '../../store';
+// import InputMask from 'react-input-mask';
+// import { RootState } from '../../store';
 
-const EmployeeForm: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const employees = useSelector((state: RootState) => state.employees.employees);
-  const employee = employees.find(emp => emp.id === Number(id));
+export const EditEmployeePage: React.FC = () => {
+  // const { id } = useParams<{ id: string }>();
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  // const employees = useSelector((state: RootState) => state.employees.employees);
+  // const employee = employees.find(emp => emp.id === Number(id));
 
-  const [name, setName] = useState<string>('');
-  const [phone, setPhone] = useState<string>('');
-  const [birthday, setBirthday] = useState<string>('');
-  const [role, setRole] = useState<string>('');
-  const [isArchive, setIsArchive] = useState<boolean>(false);
+  // const [name, setName] = useState<string>('');
+  // const [phone, setPhone] = useState<string>('');
+  // const [birthday, setBirthday] = useState<string>('');
+  // const [role, setRole] = useState<string>('');
+  // const [isArchive, setIsArchive] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (employee) {
-      setName(employee.name);
-      setPhone(employee.phone);
-      setBirthday(employee.birthday);
-      setRole(employee.role);
-      setIsArchive(employee.isArchive);
-    }
-  }, [employee]);
+  // useEffect(() => {
+  //   if (employee) {
+  //     setName(employee.name);
+  //     setPhone(employee.phone);
+  //     setBirthday(employee.birthday);
+  //     setRole(employee.role);
+  //     setIsArchive(employee.isArchive);
+  //   }
+  // }, [employee]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (employee) {
-      dispatch(updateEmployee({ id: employee.id, name, phone, birthday, role, isArchive }));
-      navigate('/');
-    }
-  };
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (employee) {
+  //     dispatch(updateEmployee({ id: employee.id, name, phone, birthday, role, isArchive }));
+  //     navigate('/');
+  //   }
+  // };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Редактировать сотрудника</h2>
+    <>
+    </>
+    // <form onSubmit={handleSubmit}>
+      /* <h2>Редактировать сотрудника</h2>
       <input
         type="text"
         value={name}
@@ -74,9 +76,8 @@ const EmployeeForm: React.FC = () => {
         />
         В архиве
       </label>
-      <button type="submit">Сохранить</button>
-    </form>
+      <button type="submit">Сохранить</button> */
+    // </form>
   );
 };
 
-export default EmployeeForm;
