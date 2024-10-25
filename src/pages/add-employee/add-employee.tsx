@@ -1,78 +1,32 @@
-import React, { useState } from "react";
-import styles from "./add-employee.module.scss";
+import React from "react";
 import { useDispatch } from "react-redux";
-// import { addEmployee } from '../store/employeesSlice';
-// import InputMask from 'react-input-mask';
+import { useNavigate } from "react-router-dom";
+import { AppDispatch } from "../../store";
+import { addEmployee } from "../../store/employeesSlice";
+import { IEmployee } from "../../types/employee";
+import { EmployeeForm } from "../../components";
+import styles from "./add-employee.module.scss";
 
 export const AddEmployeePage: React.FC = () => {
-  // const dispatch = useDispatch();
-  // const [name, setName] = useState<string>('');
-  // const [phone, setPhone] = useState<string>('');
-  // const [birthday, setBirthday] = useState<string>('');
-  // const [role, setRole] = useState<string>('');
-  // const [isArchive, setIsArchive] = useState<boolean>(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   const newEmployee = {
-  //     id: Date.now(),
-  //     name,
-  //     phone,
-  //     birthday,
-  //     role,
-  //     isArchive,
-  //   };
-  //   dispatch(addEmployee(newEmployee));
-  //   // Сброс формы после добавления
-  //   setName('');
-  //   setPhone('');
-  //   setBirthday('');
-  //   setRole('');
-  //   setIsArchive(false);
-  // };
+  const handleFormSubmit = (data: IEmployee) => {
+    const newEmployee = { ...data, id: Date.now() }; // Генерация уникального id
+    dispatch(addEmployee(newEmployee));
+    navigate("/");
+  };
+  const handleFormClose = () => {
+    navigate("/");
+  };
 
   return (
     <section className={styles.addEmployee}>
-      <h1 className={styles.addEmployee__title}>Добавить сотрудника</h1>
+      <EmployeeForm
+        formTitle="Добавить сотрудника"
+        onSubmit={handleFormSubmit}
+        onClose={handleFormClose}
+      />
     </section>
-    // <form onSubmit={handleSubmit}>
-    /* <h2>Добавить нового сотрудника</h2>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Имя"
-        required
-      />
-      <InputMask
-        mask="+7 (999) 999-99-99"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        placeholder="Телефон"
-        required
-      />
-      <InputMask
-        mask="99.99.9999"
-        value={birthday}
-        onChange={(e) => setBirthday(e.target.value)}
-        placeholder="Дата рождения"
-        required
-      />
-      <select value={role} onChange={(e) => setRole(e.target.value)} required>
-        <option value="">Выберите должность</option>
-        <option value="cook">Повар</option>
-        <option value="waiter">Официант</option>
-        <option value="driver">Водитель</option>
-      </select>
-      <label>
-        <input
-          type="checkbox"
-          checked={isArchive}
-          onChange={() => setIsArchive(!isArchive)}
-        />
-        В архиве
-      </label>
-      <button type="submit">Добавить</button> */
-    // </form>
   );
 };

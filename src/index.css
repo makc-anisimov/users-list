@@ -12,11 +12,14 @@ body {
   /* width: 100vw; 
 }*/
 
-a {
+a, a:visited {
   font-weight: 500;
   /* color: #646cff; */
   text-decoration: none;
+  color: #50514a;
 }
+
+
 
 :root {
   min-height: 100vh;

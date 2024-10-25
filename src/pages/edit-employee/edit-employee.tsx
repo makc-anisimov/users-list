@@ -1,83 +1,51 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useNavigate } from 'react-router-dom';
-import { updateEmployee } from '../store/employeesSlice';
-// import InputMask from 'react-input-mask';
-// import { RootState } from '../../store';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import { RootState, AppDispatch } from "../../store";
+import { updateEmployee } from "../../store/employeesSlice";
+import { IEmployee } from "../../types/employee";
+import { EmployeeForm } from "../../components";
+import styles from "./edit-employee.module.scss";
+import NotFoundImage from "../../assets/images/404.webp";
 
 export const EditEmployeePage: React.FC = () => {
-  // const { id } = useParams<{ id: string }>();
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
-  // const employees = useSelector((state: RootState) => state.employees.employees);
-  // const employee = employees.find(emp => emp.id === Number(id));
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
 
-  // const [name, setName] = useState<string>('');
-  // const [phone, setPhone] = useState<string>('');
-  // const [birthday, setBirthday] = useState<string>('');
-  // const [role, setRole] = useState<string>('');
-  // const [isArchive, setIsArchive] = useState<boolean>(false);
+  const employee = useSelector((state: RootState) =>
+    state.employees.employees.find((emp) => emp.id === Number(id))
+  );
 
-  // useEffect(() => {
-  //   if (employee) {
-  //     setName(employee.name);
-  //     setPhone(employee.phone);
-  //     setBirthday(employee.birthday);
-  //     setRole(employee.role);
-  //     setIsArchive(employee.isArchive);
-  //   }
-  // }, [employee]);
-
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   if (employee) {
-  //     dispatch(updateEmployee({ id: employee.id, name, phone, birthday, role, isArchive }));
-  //     navigate('/');
-  //   }
-  // };
-
+  const handleFormSubmit = (data: IEmployee) => {
+    dispatch(updateEmployee(data));
+    navigate("/");
+  };
+  const handleFormClose = () => {
+    navigate("/");
+  };
   return (
-    <>
-    </>
-    // <form onSubmit={handleSubmit}>
-      /* <h2>Редактировать сотрудника</h2>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Имя"
-        required
-      />
-      <InputMask
-        mask="+7 (999) 999-99-99"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        placeholder="Телефон"
-        required
-      />
-      <InputMask
-        mask="99.99.9999"
-        value={birthday}
-        onChange={(e) => setBirthday(e.target.value)}
-        placeholder="Дата рождения"
-        required
-      />
-      <select value={role} onChange={(e) => setRole(e.target.value)} required>
-        <option value="">Выберите должность</option>
-        <option value="cook">Повар</option>
-        <option value="waiter">Официант</option>
-        <option value="driver">Водитель</option>
-      </select>
-      <label>
-        <input
-          type="checkbox"
-          checked={isArchive}
-          onChange={() => setIsArchive(!isArchive)}
+    <section className={styles.edit}>
+      {employee ? (
+        <EmployeeForm
+          initialData={employee}
+          formTitle="Редактировать сотрудника"
+          onSubmit={handleFormSubmit}
+          onClose={handleFormClose}
         />
-        В архиве
-      </label>
-      <button type="submit">Сохранить</button> */
-    // </form>
+      ) : (
+        <>
+          <p className={styles.edit__errorText}>Пользователь не найден</p>
+          <img
+            className={styles.edit__image}
+            src={NotFoundImage}
+            alt="404 Not Found"
+          />
+          <Link to="/" className={styles.edit__homeLink}>
+            Вернуться на главную
+          </Link>
+        </>
+      )}
+    </section>
   );
 };
-

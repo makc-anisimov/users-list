@@ -1,0 +1,19 @@
+.edit {
+  padding: 25px 50px;
+  width: calc(100% - 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+
+  &__errorText {
+    font-size: 22px;
+  }
+  &__image {
+    border-radius: 50%;
+    max-width: 60vw;
+    max-height: 60vh;
+    box-shadow: 0 0 25px 10px rgba(248, 253, 217, 0.7);
+    object-fit: cover;
+  }
+}

@@ -37,7 +37,7 @@ export const EmployeesList: React.FC<EmployeesListProps> = ({
         <li className={styles.employeesList__item} key={employee.id}>
           <Link
             className={styles.employeesList__link}
-            to={`/employee/${employee.id}`}
+            to={`/edit/${employee.id}`}
           >
             <span className={styles.employeesList__name}>{employee.name}</span>
             <span className={styles.employeesList__birthday}>
