@@ -1,0 +1,63 @@
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+
+  &__filter {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  &__filterSelect {
+    padding: 8px;
+    border-radius: 8px;
+  }
+  &__filterSelectOption {
+    &:active {
+      outline: none;
+    }
+  }
+
+  &__checkBoxContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+  }
+
+  &__addButton {
+    font-size: 12px;
+    display: flex;
+    gap: 4px;
+    flex-direction: row;
+    align-items: center;
+    color: #50514a;
+    padding: 0 10px;
+    height: 28px;
+    border-radius: 14px;
+    // border: 1px solid #50514a;
+    background-color: #f8fdd9;
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 0px 5px 2px rgba(34, 60, 80, 0.2);
+  }
+  &__addButtonSymb {
+    width: 12px;
+    height: 12px;
+  }
+  @media screen and (max-width: 890px) {
+    flex-direction: column;
+    gap: 20px;
+    &__filter {
+      // flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    &__addButton {
+      align-self: flex-end;
+    }
+  }
+}

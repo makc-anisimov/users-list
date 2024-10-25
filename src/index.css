@@ -19,14 +19,26 @@ a {
 }
 
 :root {
+  min-height: 100vh;
   font-family: Inter, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   margin: 0 auto;
 
   color-scheme: light dark;
-  background-color: #f8fdd9;
-  color: #50514A;
+  /* background-color: rgba(248, 253, 217, 0.5); */
+  background: rgb(80, 81, 74);
+  background: linear-gradient(
+    144deg,
+    rgba(80, 81, 74, 0.5046393557422969) 0%,
+    rgba(248, 253, 217, 1) 15%,
+    rgba(248, 253, 217, 1) 30%,
+    rgba(189, 205, 104, 0.7455357142857143) 50%,
+    rgba(248, 253, 217, 1) 70%,
+    rgba(248, 253, 217, 0.7679446778711485) 85%,
+    rgba(80, 81, 74, 0.5102415966386555) 100%
+  );
+  color: #50514a;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

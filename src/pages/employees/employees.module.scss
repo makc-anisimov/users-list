@@ -1,6 +1,6 @@
 .employees {
-  padding: 25px 40px;
-  width: calc(100% - 80px);
+  padding: 25px 50px;
+  width: calc(100% - 100px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,37 +10,8 @@
     font-weight: 600;
     margin: 0;
   }
-  &__toolbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-
-  }
-  &__filter {
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-  }
-
-  &__addButton {
-    font-size: 12px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: #50514a;
-    padding: 0 10px;
-    height: 28px;
-    border-radius: 14px;
-    // border: 1px solid #50514a;
-    background-color: #bdcd68;
-    -webkit-box-shadow: 0px 0px 8px 4px rgba(34, 60, 80, 0.2);
-    -moz-box-shadow: 0px 0px 8px 4px rgba(34, 60, 80, 0.2);
-    box-shadow: 0px 0px 8px 4px rgba(34, 60, 80, 0.2);
-
-  }
-  &__addButtonSymb {
-    width: 24px;
-    height: 24px;
+  @media screen and (max-width: 890px) {
+    padding: 20px 35px;
+    width: calc(100% - 70px);
   }
 }

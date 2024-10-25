@@ -3,12 +3,13 @@ import styles from "./list.module.scss";
 import { IEmployee } from "../../types/employee";
 import { Link } from "react-router-dom";
 
-export const EmployeesList = ({
-  employeesData,
-}: {
+interface EmployeesListProps {
   employeesData: IEmployee[];
+}
+
+export const EmployeesList: React.FC<EmployeesListProps> = ({
+  employeesData,
 }) => {
-  // 'driver' | 'waiter' | 'cook';
   const translateRole = (text: string) => {
     switch (text) {
       case "driver":
@@ -55,4 +56,3 @@ export const EmployeesList = ({
     </ul>
   );
 };
-// export default EmployeesList;
