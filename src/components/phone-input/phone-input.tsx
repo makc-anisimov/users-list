@@ -21,22 +21,21 @@ export const PhoneInput: FC<PhoneInputProps> = ({
     if (inputRef.current) {
       const mask = IMask(inputRef.current, {
         mask: "+7 (000) 000-0000",
-        lazy: false, // показывать маску даже если поле пустое
+        lazy: false,
       });
 
-      // Обновление значения
       mask.on("accept", () => {
         onChange(mask.value);
       });
 
-      // Установка начального значения при монтировании
-      inputRef.current.value = value;
+      mask.updateValue();
+      mask.value = value;
 
       return () => {
-        mask.destroy(); // Уничтожаем маску при размонтировании компонента
+        mask.destroy();
       };
     }
-  }, [onChange, value]); // Добавляем value в зависимости
+  }, [onChange, value]);
 
   return (
     <label className={styles.phoneInput}>
@@ -45,8 +44,7 @@ export const PhoneInput: FC<PhoneInputProps> = ({
         className={styles.phoneInput__input}
         ref={inputRef}
         type="text"
-        onChange={(e) => onChange(e.target.value)} // Обработка изменения
-        required
+        placeholder="+7 (123) 456-7890"
       />
       <span className={styles.phoneInput__errorText}>{errorText}</span>
     </label>

@@ -20,36 +20,51 @@ export const DateInput: FC<DateInputProps> = ({
   useEffect(() => {
     if (inputRef.current) {
       const mask = IMask(inputRef.current, {
-        mask: Date,
-        lazy: false, // показывать маску даже если поле пустое
+        mask: "d.m.Y", 
+        lazy: false, 
+        blocks: {
+          d: {
+            mask: IMask.MaskedRange,
+            from: 1,
+            to: 31,
+            maxLength: 2,
+          },
+          m: {
+            mask: IMask.MaskedRange,
+            from: 1,
+            to: 12,
+            maxLength: 2,
+          },
+          Y: {
+            mask: IMask.MaskedRange,
+            from: 1900, 
+            to: new Date().getFullYear(), 
+            maxLength: 4,
+          },
+        },
       });
 
-      // Обновление значения
       mask.on("accept", () => {
         onChange(mask.value);
       });
 
-      // Установка начального значения при монтировании
-      inputRef.current.value = value;
+      mask.updateValue();
+      mask.value = value;
 
       return () => {
-        mask.destroy(); // Уничтожаем маску при размонтировании компонента
+        mask.destroy();
       };
     }
-  }, [onChange, value]); // Добавляем value в зависимости
+  }, [onChange, value]);
 
   return (
-    <label className={styles.phoneInput}>
+    <label className={styles.dateInput}>
       {title}
-      <input
-        className={styles.phoneInput__input}
-        ref={inputRef}
-        type="text"
-        onChange={(e) => onChange(e.target.value)} // Обработка изменения
-        required
-      />
-      <span className={styles.phoneInput__errorText}>{errorText}</span>
+      <input 
+      className={styles.dateInput__input}
+       ref={inputRef} 
+       type="text" />
+      <span className={styles.dateInput__errorText}>{errorText}</span>
     </label>
   );
 };
-

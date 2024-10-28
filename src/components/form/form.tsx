@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { IEmployee } from "../../types/employee";
 import styles from "./form.module.scss";
 import clsx from "clsx";
-import {PhoneInput} from "../index";
+import { DateInput, PhoneInput } from "../index"; // Импортируем DateInput и PhoneInput
 
 interface EmployeeFormProps {
   formTitle: string;
@@ -10,16 +10,6 @@ interface EmployeeFormProps {
   onSubmit: (data: IEmployee) => void;
   onClose: () => void;
 }
-
-const formatDate = (date: string): string => {
-  const [year, month, day] = date.split("-");
-  return `${day}.${month}.${year}`;
-};
-
-const parseDate = (date: string): string => {
-  const [day, month, year] = date.split(".");
-  return `${year}-${month}-${day}`;
-};
 
 export const EmployeeForm: React.FC<EmployeeFormProps> = ({
   initialData,
@@ -38,10 +28,9 @@ export const EmployeeForm: React.FC<EmployeeFormProps> = ({
     }
   );
 
-  const [textErrorName, setTextErrorName] = useState<string>("");
-  const [textErrorPhone, setTextErrorPhone] = useState<string>("");
-  const [textErrorBirthday, setTextErrorBirthday] = useState<string>("");
-  const [isFormValid, setIsFormValid] = useState<boolean>(true);
+  const [nameErrorText, setNameErrorText] = useState<string>("");
+  const [phoneErrorText, setPhoneErrorText] = useState<string>("");
+  const [dateErrorText, setDateErrorText] = useState<string>("");
 
   useEffect(() => {
     if (initialData) {
@@ -54,11 +43,32 @@ export const EmployeeForm: React.FC<EmployeeFormProps> = ({
 
   const handlePhoneChange = (value: string) => {
     setFormData({ ...formData, phone: value });
+    
+    // Проверка на валидность номера телефона
+    const phoneRegex = /^\+7 \(\d{3}\) \d{3}-\d{4}$/; // Регулярное выражение для проверки формата
+    if (!phoneRegex.test(value)) {
+      setPhoneErrorText("Некорректный номер телефона");
+    } else {
+      setPhoneErrorText("");
+    }
+  };
+
+  const handleDateChange = (value: string) => {
+    setFormData({ ...formData, birthday: value });
+    
+    // Проверка на валидность даты
+    const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(\d{4})$/; // Регулярное выражение для проверки формата
+    if (!dateRegex.test(value)) {
+      setDateErrorText("Некорректная дата");
+    } else {
+      setDateErrorText("");
+    }
   };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
+    setNameErrorText(""); 
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -69,9 +79,34 @@ export const EmployeeForm: React.FC<EmployeeFormProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({ ...formData, birthday: formatDate(formData.birthday) });
+    
+    let hasErrors = false; // Флаг для отслеживания ошибок
+
+    // Проверка имени
+    if (formData.name.length === 0) {
+      setNameErrorText("Имя должно быть заполнено");
+      hasErrors = true;
+    }
+
+    // Проверка телефона
+    const phoneRegex = /^\+7 \(\d{3}\) \d{3}-\d{4}$/;
+    if (!phoneRegex.test(formData.phone)) {
+      setPhoneErrorText("Некорректный номер телефона");
+      hasErrors = true;
+    }
+
+    // Проверка даты
+    const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(\d{4})$/;
+    if (!dateRegex.test(formData.birthday)) {
+      setDateErrorText("Некорректная дата");
+      hasErrors = true;
+    }
+
+    // Если есть ошибки, не отправляем форму
+    if (!hasErrors) {
+      onSubmit(formData);
+    }
   };
-  useEffect(() => {}, [formData]);
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -84,14 +119,19 @@ export const EmployeeForm: React.FC<EmployeeFormProps> = ({
       <label className={styles.form__label}>
         Имя
         <input
-          className={clsx(styles.form__input, styles.form__input_name)}
+          className={clsx(
+            styles.form__input,
+            styles.form__input_name,
+            nameErrorText !== "" ? styles.form__input_error : ""
+          )}
           type="text"
           name="name"
           value={formData.name}
           onChange={handleChange}
-          required
         />
-        <span className={styles.form__errorTextInput}>errorText</span>
+        {nameErrorText !== "" && (
+          <span className={styles.form__errorTextInput}>{nameErrorText}</span>
+        )}
       </label>
       <label className={styles.form__label}>
         Роль:
@@ -108,21 +148,16 @@ export const EmployeeForm: React.FC<EmployeeFormProps> = ({
       </label>
       <PhoneInput
         title="Телефон"
-        errorText="ww"
+        errorText={phoneErrorText} 
         value={formData.phone}
-        onChange={handlePhoneChange} // Используем новый обработчик
+        onChange={handlePhoneChange}
       />
-      <label className={styles.form__label}>
-        День рождения:{formData.birthday}
-        <input
-          className={clsx(styles.form__input, styles.form__input_birthday)}
-          type="date"
-          name="birthday"
-          value={formData.birthday}
-          onChange={handleChange}
-          maxLength={8}
-        />
-      </label>
+      <DateInput
+        title="День рождения"
+        errorText={dateErrorText} 
+        value={formData.birthday}
+        onChange={handleDateChange}
+      />
       <label className={clsx(styles.form__label, styles.form__label_checkbox)}>
         В архиве:
         <input
@@ -132,12 +167,7 @@ export const EmployeeForm: React.FC<EmployeeFormProps> = ({
           onChange={handleChange}
         />
       </label>
-      <button
-        className={clsx(
-          styles.form__submitButton /* styles.form__submitButton_active*/
-        )}
-        type="submit"
-      >
+      <button className={styles.form__submitButton} type="submit">
         Сохранить
       </button>
     </form>

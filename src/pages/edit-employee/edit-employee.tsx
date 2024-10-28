@@ -25,7 +25,6 @@ export const EditEmployeePage: React.FC = () => {
     navigate("/");
   };
 
-  console.log(employee);
   return (
     <section className={styles.edit}>
       {employee ? (

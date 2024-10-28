@@ -4,6 +4,7 @@
   align-items: flex-start;
   gap: 2px;
   width: 100%;
+  min-height: 63px;
   &__input {
     width: 100%;
     background: none;
@@ -12,7 +13,7 @@
     padding: 0;
     &:focus-visible {
       outline: none;
-      // border: none;
+      border-bottom: 1px solid #BDCD68;
     }
   }
   &__errorText {
