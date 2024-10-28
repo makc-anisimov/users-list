@@ -42,33 +42,19 @@ export const EmployeeForm: React.FC<EmployeeFormProps> = ({
   }, [initialData]);
 
   const handlePhoneChange = (value: string) => {
+    setPhoneErrorText("");
     setFormData({ ...formData, phone: value });
-    
-    // Проверка на валидность номера телефона
-    const phoneRegex = /^\+7 \(\d{3}\) \d{3}-\d{4}$/; // Регулярное выражение для проверки формата
-    if (!phoneRegex.test(value)) {
-      setPhoneErrorText("Некорректный номер телефона");
-    } else {
-      setPhoneErrorText("");
-    }
   };
 
   const handleDateChange = (value: string) => {
+    setDateErrorText("");
     setFormData({ ...formData, birthday: value });
-    
-    // Проверка на валидность даты
-    const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(\d{4})$/; // Регулярное выражение для проверки формата
-    if (!dateRegex.test(value)) {
-      setDateErrorText("Некорректная дата");
-    } else {
-      setDateErrorText("");
-    }
   };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setNameErrorText(""); 
+    setNameErrorText("");
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -79,7 +65,7 @@ export const EmployeeForm: React.FC<EmployeeFormProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     let hasErrors = false; // Флаг для отслеживания ошибок
 
     // Проверка имени
@@ -148,13 +134,14 @@ export const EmployeeForm: React.FC<EmployeeFormProps> = ({
       </label>
       <PhoneInput
         title="Телефон"
-        errorText={phoneErrorText} 
+        errorText={phoneErrorText}
+        setPhoneErrorText={setPhoneErrorText}
         value={formData.phone}
         onChange={handlePhoneChange}
       />
       <DateInput
         title="День рождения"
-        errorText={dateErrorText} 
+        errorText={dateErrorText}
         value={formData.birthday}
         onChange={handleDateChange}
       />

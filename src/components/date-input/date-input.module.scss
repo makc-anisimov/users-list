@@ -16,6 +16,9 @@
       border-bottom: 1px solid #BDCD68;
       // border: none;
     }
+    &_error {
+      border-bottom: 1px solid #ff5454;
+    }
   }
   &__errorText {
     font-size: 10px;

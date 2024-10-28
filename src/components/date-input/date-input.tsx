@@ -1,6 +1,7 @@
 import { FC, useEffect, useRef } from "react";
 import IMask from "imask";
 import styles from "./date-input.module.scss";
+import clsx from "clsx";
 
 interface DateInputProps {
   value: string;
@@ -20,8 +21,8 @@ export const DateInput: FC<DateInputProps> = ({
   useEffect(() => {
     if (inputRef.current) {
       const mask = IMask(inputRef.current, {
-        mask: "d.m.Y", 
-        lazy: false, 
+        mask: "d.m.Y",
+        lazy: false,
         blocks: {
           d: {
             mask: IMask.MaskedRange,
@@ -37,8 +38,8 @@ export const DateInput: FC<DateInputProps> = ({
           },
           Y: {
             mask: IMask.MaskedRange,
-            from: 1900, 
-            to: new Date().getFullYear(), 
+            from: 1900,
+            to: new Date().getFullYear(),
             maxLength: 4,
           },
         },
@@ -60,10 +61,14 @@ export const DateInput: FC<DateInputProps> = ({
   return (
     <label className={styles.dateInput}>
       {title}
-      <input 
-      className={styles.dateInput__input}
-       ref={inputRef} 
-       type="text" />
+      <input
+        className={clsx(
+          styles.dateInput__input,
+          errorText !== "" ? styles.dateInput__input_error : ""
+        )}
+        ref={inputRef}
+        type="text"
+      />
       <span className={styles.dateInput__errorText}>{errorText}</span>
     </label>
   );
