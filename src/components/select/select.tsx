@@ -49,5 +49,3 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
     </div>
   );
 };
-
-// export default CustomSelect;

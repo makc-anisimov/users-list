@@ -61,4 +61,26 @@
       align-self: flex-end;
     }
   }
+  @media screen and (max-width: 768px) {
+    &__filter {
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 20px;
+    }
+    &__filterSelect {
+      font-size: 12px;
+    }
+    &__addButton {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &__addButtonText {
+      display: none;
+    }
+  }
 }

@@ -34,26 +34,46 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           <option value="driver">Водитель</option>
         </select>
 
-        <select 
+        <select
           className={styles.toolbar__filterSelect}
           value={sortOption}
           onChange={(e) => setSortOption(e.target.value)}
         >
-          <option className={styles.toolbar__filterSelectOption} value="" disabled>
+          <option
+            className={styles.toolbar__filterSelectOption}
+            value=""
+            disabled
+          >
             Сортировка
           </option>
-          <option className={styles.toolbar__filterSelectOption} value="nameAsc">По имени (A-Z)</option>
-          <option className={styles.toolbar__filterSelectOption} value="nameDesc">По имени (Z-A)</option>
-          <option className={styles.toolbar__filterSelectOption} value="birthdayAsc">
+          <option
+            className={styles.toolbar__filterSelectOption}
+            value="nameAsc"
+          >
+            По имени (A-Z)
+          </option>
+          <option
+            className={styles.toolbar__filterSelectOption}
+            value="nameDesc"
+          >
+            По имени (Z-A)
+          </option>
+          <option
+            className={styles.toolbar__filterSelectOption}
+            value="birthdayAsc"
+          >
             По дате рождения (сначала старшие)
           </option>
-          <option className={styles.toolbar__filterSelectOption} value="birthdayDesc">
+          <option
+            className={styles.toolbar__filterSelectOption}
+            value="birthdayDesc"
+          >
             По дате рождения (сначала младшие)
           </option>
         </select>
         <label className={styles.toolbar__checkBoxContainer}>
           <input
-          className={styles.toolbar__checkBox}
+            className={styles.toolbar__checkBox}
             type="checkbox"
             checked={filterArchive}
             onChange={() => setFilterArchive(!filterArchive)}
