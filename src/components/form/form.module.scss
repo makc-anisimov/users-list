@@ -35,6 +35,7 @@
   }
   &__label {
     display: flex;
+    gap: 2px;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
@@ -44,6 +45,10 @@
       align-items: center;
       gap: 4px;
     }
+  }
+  &__errorTextInput {
+    font-size: 10px;
+    color: #ff5454;
   }
 
   &__select {

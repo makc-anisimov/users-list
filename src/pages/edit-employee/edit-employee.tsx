@@ -24,6 +24,8 @@ export const EditEmployeePage: React.FC = () => {
   const handleFormClose = () => {
     navigate("/");
   };
+
+  console.log(employee);
   return (
     <section className={styles.edit}>
       {employee ? (
