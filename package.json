@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://makc-anisimov.github.io/users-list",
+  "homepage": "https://makc-anisimov.github.io/users-list/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
