@@ -1,6 +1,6 @@
 {
   "name": "pf-test",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "type": "module",
   "homepage": "https://makc-anisimov.github.io/users-list/",
