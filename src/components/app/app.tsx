@@ -12,7 +12,7 @@ import {
 const App: React.FC = () => {
   return (
     <Provider store={store}>
-      <Router>
+      <Router basename="/users-list">
         <Routes>
           <Route path="/" element={<EmployeesPage />} />
           <Route path="/edit/:id" element={<EditEmployeePage />} />
