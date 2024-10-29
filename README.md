@@ -1,4 +1,4 @@
-# Demo Page Settings for BankDash
+# Employees list
 
 Реализация проекта доступна по ссылке: https://makc-anisimov.github.io/users-list/
 
